@@ -1,3 +1,6 @@
+import os
+import subprocess
+import yaml 
 
 style = {
     'NORMAL': '\033[0m',
@@ -51,8 +54,28 @@ def error(text):
     print(prettify("<red>[ERROR] : {}</red>".format(text)))
     sys.exit(1)
 
+def warning(text): 
+    print(prettify("<red>[WARNING] : {}</red>".format(text)))
+
+
 def ok(text): 
     print(prettify("<green>{}</green>".format(text)))
 
 def title(text):
     print(prettify("<title>{}</title>").format(text))
+
+def subtitle(text):
+    print(prettify("<h1> > {}</h1>").format(text))
+
+def readKeyFromSecretsFile(keyPath):
+    secretFile = subprocess.Popen(["sops", "-d", "{}/secrets.yaml".format(os.getenv('CK8S_CONFIG_PATH'))], stdout=subprocess.PIPE)
+    key = subprocess.check_output(["yq4", keyPath], stdin=secretFile.stdout)
+    secretFile.wait()
+    
+    return key.decode("utf-8").strip()
+
+def readKeyFromCommonConfig(keyPath):
+
+    key = subprocess.run(["yq4", keyPath, "{}/common-config.yaml".format(os.getenv('CK8S_CONFIG_PATH'))], stdout=subprocess.PIPE).stdout.decode("utf-8").strip()
+    return key
+

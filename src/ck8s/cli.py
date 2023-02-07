@@ -55,9 +55,9 @@ def main():
 if __name__== "__main__":
   parser = create_parser()
   args = vars(parser.parse_args())
-  print(args)
+  # print(args)
   if args['command'] == 'init':
-      pass
+    pass
   elif args['command'] == 'apps':
     pass
   elif args['command'] == 'apply':

@@ -6,7 +6,7 @@ with open("readme.rst", "r") as f:
 
 setup(
     name="ck8s",
-    version="0.0.1",
+    version="0.0.2",
     description="CK8S POC command line",
     long_description=readme,
     author='Ayoub ED-DAFALI',

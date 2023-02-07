@@ -11,6 +11,9 @@ mako = "*"
 wget = "*"
 kubernetes = "*"
 twine = "*"
+yq = "*"
+requests = "*"
+jq = "*"
 
 [requires]
 python_version = "3.9"
